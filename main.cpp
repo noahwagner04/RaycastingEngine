@@ -48,5 +48,15 @@ int main(int, char *[])
 	double planeX = 0, planeY = 0.66;
 
 	screen(screenWidth, screenHeight, 0, "Raycaster");
+
+	while(!done()) 
+	{
+		for (int x = 0; x < w; ++x)
+		{
+			double cameraX = 2 * x / (double) (w) - 1;
+			double rayDirX = dirX + planeX * cameraX;
+			double rayDirY = dirY + planeY * cameraX;
+		}
+	}
 	return 0;
 }
