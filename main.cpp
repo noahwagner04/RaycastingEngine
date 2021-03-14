@@ -49,13 +49,57 @@ int main(int, char *[])
 
 	screen(screenWidth, screenHeight, 0, "Raycaster");
 
-	while(!done()) 
+	while(!done())
 	{
-		for (int x = 0; x < w; ++x)
+		for (int x = 0; x < w; x++)
 		{
 			double cameraX = 2 * x / (double) (w) - 1;
 			double rayDirX = dirX + planeX * cameraX;
 			double rayDirY = dirY + planeY * cameraX;
+
+			int mapX = (int)posX;
+			int mapY = (int)posY;
+
+			double sideDistX;
+			double sideDistY;
+
+			int stepX;
+			int stepY;
+
+			double deltaDistX = sqrt(1 + (rayDirY * rayDirY) / (rayDirX * rayDirX));
+			double deltaDistY = sqrt(1 + (rayDirX * rayDirX) / (rayDirY * rayDirY));
+
+			int hit;
+			int side;
+
+			if(rayDirX < 0) {
+				stepX = -1;
+				sideDistX = (mapX - posX) * deltaDistX;
+			} else {
+				stepX = 1;
+				sideDistX = (1 - (mapX - posX)) * deltaDistX;
+			}
+			if(rayDirY < 0) {
+				stepY = -1;
+				sideDistY = (mapY - posY) * deltaDistY;
+			} else {
+				stepY = 1;
+				sideDistY = (1 - (mapY - posY)) * deltaDistY;
+			}
+
+			while(hit == 0) {
+				if(sideDistX > sideDistY) {
+					mapY += stepY;
+					sideDistY += deltaDistY;
+					side = 1;
+				} else {
+					mapX += stepX;
+					sideDistX += deltaDistX;
+					side = 0;
+				}
+				if(worldMap[mapX][mapY] > 0) hit = 1;
+			}
+
 		}
 	}
 	return 0;
