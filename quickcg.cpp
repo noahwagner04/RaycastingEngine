@@ -198,6 +198,17 @@ namespace QuickCG
     SDL_RenderPresent(render);
   }
 
+  // clears all surface pixels to black
+  void clearSrf(const ColorRGBA& color) {
+    for (int x = 0; x < w; ++x)
+    {
+      for (int y = 0; y < h; ++y)
+      {
+        pset(x, y, color);
+      }
+    }
+  }
+
   //Clears the screen to black
   void cls(const ColorRGBA& color)
   {
