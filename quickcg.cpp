@@ -200,16 +200,10 @@ namespace QuickCG
 
   // clears all surface pixels to black
   void clearSrf(const ColorRGBA& color) {
-    for (int x = 0; x < w; ++x)
-    {
-      for (int y = 0; y < h; ++y)
-      {
-        pset(x, y, color);
-      }
-    }
+    SDL_FillRect(srf, NULL, SDL_MapRGBA(srf->format, color.r, color.g, color.b, color.a));
   }
 
-  //Clears the screen to black
+  //Clears the screen to black (Stoopid doo-doo head function that cost me like an hour, use clearSrf instead)
   void cls(const ColorRGBA& color)
   {
     SDL_SetRenderDrawColor(render, color.r, color.g, color.b, color.a);
