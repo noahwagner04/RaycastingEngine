@@ -43,7 +43,7 @@ int worldMap[mapWidth][mapHeight] =
 
 int main(int, char *[])
 {
-	double posX = 22, posY = 12;
+	double posX = 22.5, posY = 12;
 	double dirX = -1, dirY = 0;
 	double planeX = 0, planeY = 0.66;
 
@@ -51,9 +51,9 @@ int main(int, char *[])
 	double oldTime = 0;
 
 	screen(screenWidth, screenHeight, 0, "Raycaster");
-
 	while (!done())
 	{
+		clearSrf();
 		for (int x = 0; x < w; x++)
 		{
 			double cameraX = 2 * x / (double) (w) - 1;
@@ -75,19 +75,27 @@ int main(int, char *[])
 			int hit = 0;
 			int side;
 
-			if (rayDirX < 0) {
+
+			//calculate step and initial sideDist
+			if (rayDirX < 0)
+			{
 				stepX = -1;
-				sideDistX = (mapX - posX) * deltaDistX;
-			} else {
-				stepX = 1;
-				sideDistX = (1 - (mapX - posX)) * deltaDistX;
+				sideDistX = (posX - mapX) * deltaDistX;
 			}
-			if (rayDirY < 0) {
+			else
+			{
+				stepX = 1;
+				sideDistX = (mapX + 1.0 - posX) * deltaDistX;
+			}
+			if (rayDirY < 0)
+			{
 				stepY = -1;
-				sideDistY = (mapY - posY) * deltaDistY;
-			} else {
+				sideDistY = (posY - mapY) * deltaDistY;
+			}
+			else
+			{
 				stepY = 1;
-				sideDistY = (1 - (mapY - posY)) * deltaDistY;
+				sideDistY = (mapY + 1.0 - posY) * deltaDistY;
 			}
 
 			while (hit == 0) {
@@ -112,9 +120,6 @@ int main(int, char *[])
 			int drawEnd = lineHeight / 2 + h / 2;
 			if (drawEnd >= h) drawEnd = h - 1;
 
-			// if (side == 0) cout << sideDistX << "\n" << perpWallDist << "\n";
-
-
 			//choose wall color
 			ColorRGBA color;
 			switch (worldMap[mapX][mapY])
@@ -136,8 +141,8 @@ int main(int, char *[])
 		time = getTicks();
 		double frameTime = (time - oldTime) / 1000.0; //frameTime is the time this frame has taken, in seconds
 		print(1.0 / frameTime); //FPS counter
+		// cls(RGB_Black);
 		redraw();
-
 		double moveSpeed = frameTime * 5.0; //the constant value is in squares/second
 		double rotSpeed = frameTime * 3.0; //the constant value is in radians/second
 
