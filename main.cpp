@@ -169,8 +169,10 @@ int main(int, char *[])
 				int texY = (int)texPos & (texHeight - 1);
 				texPos += step;
 				Uint32 color = texture[texNum][texHeight * texX + texY];
+				color = (color << 8) | 255;
 				//make color darker for y-sides: R, G and B byte each divided through two with a "shift" and an "and"
-				if (side == 1) color = (color >> 1) & 8355711;
+				// if(cameraX == 0 && y == drawStart) cout << color << "\n";
+				if (side == 1) color = (color >> 1) & 2139062143 | 255;
 				buffer[y][x] = color;
 			}
 		}
