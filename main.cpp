@@ -9,48 +9,71 @@ using namespace std;
 
 #define mapWidth 24
 #define mapHeight 24
-#define screenWidth 640
-#define screenHeight 480
+#define texWidth 64
+#define texHeight 64
+#define screenWidth 1200
+#define screenHeight 900
 
 int worldMap[mapWidth][mapHeight] =
 {
-	{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-	{1, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-	{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-	{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-	{1, 0, 0, 0, 0, 0, 2, 2, 2, 2, 2, 0, 0, 0, 0, 3, 0, 3, 0, 3, 0, 0, 0, 1},
-	{1, 0, 0, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-	{1, 0, 0, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0, 1},
-	{1, 0, 0, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-	{1, 0, 0, 0, 0, 0, 2, 2, 0, 2, 2, 0, 0, 0, 0, 3, 0, 3, 0, 3, 0, 0, 0, 1},
-	{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-	{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-	{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-	{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-	{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-	{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-	{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-	{1, 4, 4, 4, 4, 4, 4, 4, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-	{1, 4, 0, 4, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-	{1, 4, 0, 0, 0, 0, 5, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-	{1, 4, 0, 4, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-	{1, 4, 0, 4, 4, 4, 4, 4, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-	{1, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-	{1, 4, 4, 4, 4, 4, 4, 4, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-	{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
+	{4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 7, 7, 7, 7, 7, 7, 7, 7},
+	{4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 7},
+	{4, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7},
+	{4, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7},
+	{4, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 7},
+	{4, 0, 4, 0, 0, 0, 0, 5, 5, 5, 5, 5, 5, 5, 5, 5, 7, 7, 0, 7, 7, 7, 7, 7},
+	{4, 0, 5, 0, 0, 0, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 7, 0, 0, 0, 7, 7, 7, 1},
+	{4, 0, 6, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 5, 7, 0, 0, 0, 0, 0, 0, 8},
+	{4, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 7, 7, 1},
+	{4, 0, 8, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 5, 7, 0, 0, 0, 0, 0, 0, 8},
+	{4, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 5, 7, 0, 0, 0, 7, 7, 7, 1},
+	{4, 0, 0, 0, 0, 0, 0, 5, 5, 5, 5, 0, 5, 5, 5, 5, 7, 7, 7, 7, 7, 7, 7, 1},
+	{6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 0, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6},
+	{8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4},
+	{6, 6, 6, 6, 6, 6, 0, 6, 6, 6, 6, 0, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6},
+	{4, 4, 4, 4, 4, 4, 0, 4, 4, 4, 6, 0, 6, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3},
+	{4, 0, 0, 0, 0, 0, 0, 0, 0, 4, 6, 0, 6, 2, 0, 0, 0, 0, 0, 2, 0, 0, 0, 2},
+	{4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 2, 0, 0, 5, 0, 0, 2, 0, 0, 0, 2},
+	{4, 0, 0, 0, 0, 0, 0, 0, 0, 4, 6, 0, 6, 2, 0, 0, 0, 0, 0, 2, 2, 0, 2, 2},
+	{4, 0, 6, 0, 6, 0, 0, 0, 0, 4, 6, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 2},
+	{4, 0, 0, 5, 0, 0, 0, 0, 0, 4, 6, 0, 6, 2, 0, 0, 0, 0, 0, 2, 2, 0, 2, 2},
+	{4, 0, 6, 0, 6, 0, 0, 0, 0, 4, 6, 0, 6, 2, 0, 0, 5, 0, 0, 2, 0, 0, 0, 2},
+	{4, 0, 0, 0, 0, 0, 0, 0, 0, 4, 6, 0, 6, 2, 0, 0, 0, 0, 0, 2, 0, 0, 0, 2},
+	{4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 1, 1, 1, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3}
 };
 
 
 int main(int, char *[])
 {
-	double posX = 22.5, posY = 12;
+	double posX = 22, posY = 11.5;
 	double dirX = -1, dirY = 0;
 	double planeX = 0, planeY = 0.66;
 
 	double time = 0;
 	double oldTime = 0;
 
+	Uint32 buffer[screenHeight][screenWidth]; // y-coordinate first because it works per scanline
+	std::vector<Uint32> texture[8];
+	for (int i = 0; i < 8; i++) texture[i].resize(texWidth * texHeight);
+
+	unsigned long tw, th;
+	loadImage(texture[0], tw, th, "pics/eagle.png");
+	loadImage(texture[1], tw, th, "pics/redbrick.png");
+	loadImage(texture[2], tw, th, "pics/purplestone.png");
+	loadImage(texture[3], tw, th, "pics/greystone.png");
+	loadImage(texture[4], tw, th, "pics/bluestone.png");
+	loadImage(texture[5], tw, th, "pics/mossy.png");
+	loadImage(texture[6], tw, th, "pics/wood.png");
+	loadImage(texture[7], tw, th, "pics/colorstone.png");
+
 	screen(screenWidth, screenHeight, 0, "Raycaster");
+
+	//swap texture X/Y since they'll be used as vertical stripes
+	for (size_t i = 0; i < 8; i++)
+		for (size_t x = 0; x < texWidth; x++)
+			for (size_t y = 0; y < x; y++)
+				std::swap(texture[i][texWidth * y + x], texture[i][texHeight * x + y]);
+
 	while (!done())
 	{
 		clearSrf();
@@ -99,11 +122,13 @@ int main(int, char *[])
 			}
 
 			while (hit == 0) {
-				if (sideDistX > sideDistY) {
+				if (sideDistX > sideDistY)
+				{
 					mapY += stepY;
 					sideDistY += deltaDistY;
 					side = 1;
-				} else {
+				} else
+				{
 					mapX += stepX;
 					sideDistX += deltaDistX;
 					side = 0;
@@ -114,28 +139,44 @@ int main(int, char *[])
 			if (side == 0) perpWallDist = (mapX - posX + (1 - stepX) / 2) / rayDirX;
 			else           perpWallDist = (mapY - posY + (1 - stepY) / 2) / rayDirY;
 
-			int lineHeight = (int)(h / perpWallDist);
+			int lineHeight = (int)(h / abs(perpWallDist));
 			int drawStart = -lineHeight / 2 + h / 2;
 			if (drawStart < 0) drawStart = 0;
 			int drawEnd = lineHeight / 2 + h / 2;
 			if (drawEnd >= h) drawEnd = h - 1;
 
-			//choose wall color
-			ColorRGBA color;
-			switch (worldMap[mapX][mapY])
+			//texturing calculations
+			int texNum = worldMap[mapX][mapY] - 1; //1 subtracted from it so that texture 0 can be used!
+
+			//calculate value of wallX
+			double wallX; //where exactly the wall was hit
+			if (side == 0) wallX = posY + perpWallDist * rayDirY;
+			else           wallX = posX + perpWallDist * rayDirX;
+			wallX -= floor(wallX);
+
+			//x coordinate on the texture
+			int texX = int(wallX * double(texWidth));
+			if (side == 0 && rayDirX > 0) texX = texWidth - texX - 1;
+			if (side == 1 && rayDirY < 0) texX = texWidth - texX - 1;
+
+			// How much to increase the texture coordinate per screen pixel
+			double step = 1.0 * texHeight / lineHeight;
+			// Starting texture coordinate
+			double texPos = (drawStart - h / 2 + lineHeight / 2) * step;
+			for (int y = drawStart; y < drawEnd; y++)
 			{
-			case 1:  color = RGB_Red;  break; //red
-			case 2:  color = RGB_Green;  break; //green
-			case 3:  color = RGB_Blue;   break; //blue
-			case 4:  color = RGB_White;  break; //white
-			default: color = RGB_Yellow; break; //yellow
+				// Cast the texture coordinate to integer, and mask with (texHeight - 1) in case of overflow
+				int texY = (int)texPos & (texHeight - 1);
+				texPos += step;
+				Uint32 color = texture[texNum][texHeight * texX + texY];
+				//make color darker for y-sides: R, G and B byte each divided through two with a "shift" and an "and"
+				if (side == 1) color = (color >> 1) & 8355711;
+				buffer[y][x] = color;
 			}
-
-			if (side == 1) {color = color / 2;}
-
-			verLine(x, drawStart, drawEnd, color);
 		}
 
+		drawBuffer(buffer[0]);
+		for (int y = 0; y < h; y++) for (int x = 0; x < w; x++) buffer[y][x] = 0; //clear the buffer instead of cls()
 		//timing for input and FPS counter
 		oldTime = time;
 		time = getTicks();
