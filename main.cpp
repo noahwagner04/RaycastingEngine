@@ -11,8 +11,8 @@ using namespace std;
 #define mapHeight 24
 #define texWidth 64
 #define texHeight 64
-#define screenWidth 1200
-#define screenHeight 900
+#define screenWidth 680
+#define screenHeight 480
 
 int worldMap[mapWidth][mapHeight] =
 {
@@ -76,7 +76,6 @@ int main(int, char *[])
 
 	while (!done())
 	{
-		clearSrf();
 		for (int x = 0; x < w; x++)
 		{
 			double cameraX = 2 * x / (double) (w) - 1;
@@ -169,7 +168,7 @@ int main(int, char *[])
 				int texY = (int)texPos & (texHeight - 1);
 				texPos += step;
 				Uint32 color = texture[texNum][texHeight * texX + texY];
-				color = (color << 8) | 255;
+				color = (color << 8) | 255; // this is done to fix color to account for alpha channel
 				//make color darker for y-sides: R, G and B byte each divided through two with a "shift" and an "and"
 				// if(cameraX == 0 && y == drawStart) cout << color << "\n";
 				if (side == 1) color = (color >> 1) & 2139062143 | 255;
