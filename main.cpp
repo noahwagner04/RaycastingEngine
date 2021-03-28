@@ -11,7 +11,7 @@ using namespace std;
 #define mapHeight 24
 #define texWidth 64
 #define texHeight 64
-#define screenWidth 680
+#define screenWidth 640
 #define screenHeight 480
 
 int worldMap[mapWidth][mapHeight] =
@@ -138,7 +138,7 @@ int main(int, char *[])
 			if (side == 0) perpWallDist = (mapX - posX + (1 - stepX) / 2) / rayDirX;
 			else           perpWallDist = (mapY - posY + (1 - stepY) / 2) / rayDirY;
 
-			int lineHeight = (int)(h / abs(perpWallDist));
+			int lineHeight = (int)(h / perpWallDist);
 			int drawStart = -lineHeight / 2 + h / 2;
 			if (drawStart < 0) drawStart = 0;
 			int drawEnd = lineHeight / 2 + h / 2;
