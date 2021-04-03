@@ -113,6 +113,10 @@ int main(int, char *[])
 				int tx = (int)(texWidth * (floorX - cellX)) & (texWidth - 1);
 				int ty = (int)(texHeight * (floorY - cellY)) & (texHeight - 1);
 
+				// scale texture
+				// tx = tx * 2 & (texWidth - 1);
+				// ty = ty * 2 & (texHeight - 1);
+
 				floorX += floorStepX;
 				floorY += floorStepY;
 
