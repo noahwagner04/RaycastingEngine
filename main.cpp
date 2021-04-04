@@ -74,7 +74,7 @@ int main(int, char *[])
 			for (size_t y = 0; y < x; y++)
 				std::swap(texture[i][texWidth * y + x], texture[i][texHeight * x + y]);
 
-	while (!done())
+	while (!done(true))
 	{
 		for (int y = 0; y < h; y++)
 		{

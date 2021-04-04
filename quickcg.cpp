@@ -324,7 +324,7 @@ namespace QuickCG
     bool done = false;
     if (!SDL_PollEvent(&event)) return 0;
     readKeys();
-    if (quit_if_esc && inkeys[SDLK_ESCAPE]) done = true;
+    if (quit_if_esc && inkeys[SDL_SCANCODE_ESCAPE]) done = true;
     if (event.type == SDL_QUIT) done = true;
     return done;
   }
