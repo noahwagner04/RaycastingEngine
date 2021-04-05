@@ -255,7 +255,7 @@ int main(int, char *[])
 		// cls(RGB_Black);
 		redraw();
 		double moveSpeed = frameTime * 5.0; //the constant value is in squares/second
-		double rotSpeed = frameTime * 3.0; //the constant value is in radians/second
+		double rotSpeed = frameTime * 4.5; //the constant value is in radians/second
 
 
 		readKeys();
